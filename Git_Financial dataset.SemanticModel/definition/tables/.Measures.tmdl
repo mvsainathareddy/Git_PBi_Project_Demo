@@ -102,9 +102,6 @@ table '.Measures'
 		formatString: 0
 		lineageTag: ffa937a6-dcad-42fc-8dd3-0c0121fcdf81
 
-	measure 'Sales Category' = IF(Financials[ Sales] > 1000, "High", "Low")  --- measure or cal?
-		lineageTag: 89fd2972-2d77-497a-878e-fa8653db9448
-
 	measure 'Discount Band Measure' =
 			SWITCH(
 			    TRUE(),
@@ -237,6 +234,10 @@ table '.Measures'
 		lineageTag: ec43a58e-09e7-4eea-87fa-57dc34ffcc54
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure New_git_Measure = DISTINCTCOUNT(financials[Product])
+		formatString: 0
+		lineageTag: 715e5716-0135-47ef-9a35-ba5d826c0d6b
 
 	column Column
 		isHidden

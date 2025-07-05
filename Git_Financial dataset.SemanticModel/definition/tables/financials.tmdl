@@ -83,6 +83,11 @@ table financials
 			```
 		lineageTag: f8209ae4-6f27-473e-bf12-7fbe236951a6
 
+	measure git_Measure = SUM(financials[ Sales])
+		lineageTag: 7b206f8e-144b-428c-9ab3-178691c26423
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	column Segment
 		dataType: string
 		lineageTag: eba56d12-acac-40c5-86ae-ff4b70d01ce9
