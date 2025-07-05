@@ -235,6 +235,10 @@ table '.Measures'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure New_git_Measure = DISTINCTCOUNT(financials[Product])
+		formatString: 0
+		lineageTag: 715e5716-0135-47ef-9a35-ba5d826c0d6b
+
 	column Column
 		isHidden
 		formatString: 0

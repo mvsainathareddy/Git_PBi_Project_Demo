@@ -87,7 +87,17 @@
       "height": 720.00,
       "name": "14441b72c9514790a50c",
       "ordinal": 20,
-      "visualContainers": [],
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"ca8f439b6e8a3d4b10ad\",\"layouts\":[{\"id\":0,\"position\":{\"x\":351.29553982366315,\"y\":119.62218812960943,\"z\":0,\"width\":554.1989981700892,\"height\":555.7132030831223}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Product.Country\"},{\"queryRef\":\"Product.Product\"},{\"queryRef\":\".Measures.New_git_Measure\"},{\"queryRef\":\"financials.git_Measure\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"m\",\"Entity\":\".Measures\",\"Type\":0},{\"Name\":\"p\",\"Entity\":\"Product\",\"Type\":0},{\"Name\":\"f\",\"Entity\":\"financials\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"New_git_Measure\"},\"Name\":\".Measures.New_git_Measure\",\"NativeReferenceName\":\"New_git_Measure\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Product\"},\"Name\":\"Product.Product\",\"NativeReferenceName\":\"Product\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"Country\"},\"Name\":\"Product.Country\",\"NativeReferenceName\":\"Country\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"git_Measure\"},\"Name\":\"financials.git_Measure\",\"NativeReferenceName\":\"git_Measure\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 555.71,
+          "width": 554.20,
+          "x": 351.30,
+          "y": 119.62,
+          "z": 0.00
+        }
+      ],
       "width": 1280.00
     },
     {
