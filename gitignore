@@ -1,0 +1,50 @@
+
+# Ignore Power BI temp and cache files
+*.pbix
+*.pbit
+*.tmp
+*.bak
+*.cache
+*.zip
+
+# Ignore Power BI Desktop auto-generated folders
+**/~$*
+**/~*.tmp
+
+# Ignore Power BI logs and diagnostics
+*.log
+*.dmp
+
+# Ignore user-specific settings
+*.user
+*.vsconfig
+
+# Ignore folders commonly used for local builds or temp files
+bin/
+obj/
+out/
+temp/
+logs/
+
+# Ignore Power BI service metadata (optional)
+*.pbipmetadata
+
+# Ignore paginated report temp files
+*.rdl.data
+*.rdl.cache
+
+# Node/npm (if using any automation or scripting)
+node_modules/
+package-lock.json
+
+# Python virtual environments (if used)
+.venv/
+__pycache__/
+*.pyc
+
+# VS Code settings (optional)
+.vscode/
+
+# MacOS and Windows system files
+.DS_Store
+Thumbs.db
