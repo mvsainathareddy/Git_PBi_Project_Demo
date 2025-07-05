@@ -1,0 +1,24 @@
+table TableFromList
+	lineageTag: 850f1d86-e1c7-4c89-82e3-43d7bb744dfb
+
+	column Column1
+		dataType: string
+		lineageTag: 7aa1c921-0ad5-4662-8e93-68d544331644
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TableFromList = m
+		mode: import
+		source =
+				let
+				    Source = {1, 2, 3, 4, 5},
+				    Table = Table.FromList(Source, Splitter.SplitByNothing(), {"Column1"})
+				in
+				    Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

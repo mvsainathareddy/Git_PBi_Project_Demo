@@ -1,0 +1,30 @@
+table TableToList
+	lineageTag: 5558004b-d5b9-475e-8f66-ea7af2cc3b92
+
+	column TableToList
+		dataType: string
+		lineageTag: 21fff61a-61dd-4b36-acbb-d001237e1c07
+		summarizeBy: none
+		sourceColumn: TableToList
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TableToList = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRecords({
+				        [Column1 = 1, Column2 = "A"],
+				        [Column1 = 2, Column2 = "B"],
+				        [Column1 = 3, Column2 = "C"]
+				    }),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}}),
+				    List = Table.ToList(#"Changed Type"),
+				    List1 = List{0}
+				in
+				    List1
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

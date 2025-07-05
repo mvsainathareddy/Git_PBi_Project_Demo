@@ -1,0 +1,258 @@
+table '.Measures'
+	lineageTag: c271c70d-a68a-46e6-9321-45157cba852c
+
+	measure 'Sales sum' = SUM(financials[ Sales])
+		lineageTag: 4de1f0d2-df8f-4bd7-8872-5272a83caa40
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Distinct Product#' = DISTINCTCOUNT(financials[Product])
+		formatString: 0
+		lineageTag: a96a9190-52d9-4d73-b87a-7d8ffa3ff882
+
+	measure 'Max Country Sale' = MAXX(VALUES( financials[Country]),[Sales sum])
+		lineageTag: 847e94e4-43f9-408f-913d-c0bd134b1678
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max Country Sale2' =
+			SUMX(ADDCOLUMNS(SUMMARIZE( 'Dim Date','Dim Date'[Year],'Dim Date'[Quarter])
+			        ,"M",[Max Country Sale]),[M])
+			    --MAXX(VALUES( financials[Country]),[Sales sum])
+		lineageTag: 5594d8df-2c8a-4f51-bbd3-071c67048278
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales US' =
+			--CALCULATE(SUM(financials[ Sales]), financials[Country] = "United States of America")
+			 CALCULATE(sum(financials[Total RV*]), financials[Country] = "United States of America")
+		lineageTag: 6ce7e4b4-b555-46df-881c-6aa89e4f119c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Revenue US' =
+			CALCULATE(
+			    SUMX(financials, financials[Sale Price] * financials[Units Sold]),
+			    financials[Country] = "United States of America"
+			)
+			//CALCULATE modifies the filter context in which a DAX expression is evaluated
+		formatString: 0
+		lineageTag: e2bdf67e-b5b2-46b1-a2f0-c82bd051b33a
+
+	measure 'Total Sales' =
+			SUM(financials[ Sales])
+			//Where to Use: Use these measures in a sales performance dashboard to track overall sales and profitability.
+			//Why: These measures provide a quick overview of the company's financial performance, helping stakeholders make informed decisions.
+			//Importance:DAX measures allow for dynamic calculations that update automatically with data changes, ensuring accurate and up-to-date insights.
+		displayFolder: Sales
+		lineageTag: 6bbddc50-03a5-4a44-8a5d-d078cb4dd03d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total COGS' = SUM(Financials[COGS])
+		displayFolder: Sales
+		lineageTag: 3ec90781-a510-49ab-b3b5-0dde5c84c612
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gross Profit' = [Total Sales] -  [Total COGS]
+		displayFolder: Sales
+		lineageTag: efe8c6b4-a3d9-41bd-bb51-881a56bce37e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Units Sold' = SUM(Financials[Units Sold])
+		formatString: 0
+		displayFolder: Sales
+		lineageTag: a6e7e310-2836-4d42-9a66-522d7c102c8d
+
+	measure 'Average Sale price' =
+			AVERAGE(financials[Sale Price])
+			//Where to Use: Use this measure in product performance reports to compare the average sale price of different products.
+			//Why: Understanding the average sale price helps in pricing strategy and product positioning.
+			//Importance: DAX measures provide aggregated insights that are essential for strategic decision-making.
+		displayFolder: Sales
+		lineageTag: ebcd3fcc-6920-4808-ac16-6238f983b04a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Discounts' = SUM(Financials[Discounts])
+		displayFolder: Sales
+		lineageTag: 53e2b7a4-375b-47d7-8b34-0f1f89ad5659
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Sales' = [Total Sales] - [Total Discounts]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Sales
+		lineageTag: 286ad2ff-f3f2-4659-b66c-e2773f0b1aae
+
+	measure 'Profit Margin' = DIVIDE([Gross Profit], [Total Sales], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Sales
+		lineageTag: d4a3c1ec-c2f3-4f56-a6a6-eac27c66a34d
+
+	measure 'Total Revenue sumx' = ```
+			//multiplies Sales Price by Units Sold for each row and then sums the results
+			 SUMX(
+			    Financials, -- 1.DAX returns the sales by financials
+			    Financials[Sale Price] * Financials[Units Sold]  -- 2.and then eavalutes the expression 
+			    )
+			```
+		formatString: 0
+		lineageTag: ffa937a6-dcad-42fc-8dd3-0c0121fcdf81
+
+	measure 'Sales Category' = IF(Financials[ Sales] > 1000, "High", "Low")  --- measure or cal?
+		lineageTag: 89fd2972-2d77-497a-878e-fa8653db9448
+
+	measure 'Discount Band Measure' =
+			SWITCH(
+			    TRUE(),
+			    [Discount Percentage] > 0.08, "High",  -- More than 10%
+			    [Discount Percentage] > 0.07, "Medium",  -- More than 5%
+			    [Discount Percentage] > 0.01, "Low",  // More than 0%
+			    "None"
+			)
+		lineageTag: d0f6b290-32fc-47cf-be4f-8d9499671290
+
+	measure 'Total Sales by Country' = CALCULATE(SUM(Financials[ Sales]), ALLEXCEPT(Financials, Financials[Country]))
+		lineageTag: 128d1763-bee7-41e9-af6c-2f150efeb7eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Discounts by Country' = CALCULATE(SUM(Financials[Discounts]), ALLEXCEPT(Financials, Financials[Country]))
+		lineageTag: cc5db508-697c-4d9f-a1e3-e8d63e49472f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Discount Percentage' = ```
+			DIVIDE([Total Discounts by Country], [Total Sales by Country], 0)
+			
+			```
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: 7f88a628-9e64-4e6c-8d00-c681d2722e5e
+
+	measure 'Closing Balance Total Sales' = CLOSINGBALANCEMONTH([Total Sales], financials[Date])
+		lineageTag: f31c5dda-c4de-4ea7-9dd8-ea6ed59e9261
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales MTD' = ```
+			TOTALMTD(SUM(Financials[ Sales]), Financials[Date])
+			
+			```
+		lineageTag: 69ecd776-e253-4877-ae3c-23a718e130a2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales QTD' = ```
+			TOTALQTD(SUM(Financials[ Sales]), Financials[Date])
+			
+			```
+		lineageTag: 7acd8664-bc31-4619-a99c-566c9b9793f1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales YTD' =
+			TOTALYTD(SUM(Financials[ Sales]), Financials[Date])
+			/*Where to Use: Use this measure in time-based reports to track sales performance over the year.
+			Why: Time intelligence functions help in understanding trends and seasonality in sales data.
+			Importance: DAX time intelligence functions simplify complex date calculations, making it easier to analyze data over different time periods.
+			*/
+		lineageTag: 27e1e886-6387-4a4a-90a0-320970028aa3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max Sales' = MAX(financials[ Sales])
+		displayFolder: Sales
+		lineageTag: f350c00c-5ca4-4e7d-ab7c-4fe06cd985f1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Min Sales' = MIN(financials[ Sales])
+		formatString: 0
+		lineageTag: f3efac7f-c6ed-4b7f-bcca-2f68be42ab84
+
+	measure Countrows = COUNTROWS(financials)
+		formatString: 0
+		displayFolder: Sales
+		lineageTag: 33a9b0e6-6b9e-420a-9fe4-0209f774adec
+
+	measure DISTINCTCOUNT =
+			
+			DISTINCTCOUNT(financials[Product])
+		formatString: 0
+		lineageTag: 1b57833d-0513-424e-8db7-6db54b21935d
+
+	measure COUNT = COUNT(financials[Product])
+		formatString: 0
+		displayFolder: Sales
+		lineageTag: a29d1e64-36ff-450a-8e38-49fdd939c910
+
+	measure 'Total Sales Count' = ```
+			COUNT(financials[ Sales]) 
+			--Counts non-blank numeric values
+			
+			```
+		formatString: 0
+		lineageTag: a1696c03-8009-4c6f-91b1-3f1d6ba38177
+
+	measure COUNTA =
+			--COUNTA(financials[Discount Band])
+			COUNT(financials[Product])
+			//COUNTA is used to count the number of non-blank values in a column, regardless of the data type. It works with numeric, text, and other data types
+		formatString: 0
+		lineageTag: b735f93a-e955-48cb-aff6-bf826894d58e
+
+	measure 'Total sales1' = SUM(financials[ Sales])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 014a96aa-2a62-4b70-b452-006cb85187a2
+
+	measure 'Total Sales by Product-VVT' = CALCULATE([Total Sales] , 'financials'[Product] ="VTT" , ALL(financials[Product]))
+		lineageTag: a8b072bf-b0b2-49e3-9fbb-c7efbfae1768
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales by Product-VVTorVelo' = ```
+			CALCULATE([Total Sales] , 
+			        'financials'[Product] ="VTT" || --or--
+			        'financials'[Product] ="Velo" )
+			```
+		lineageTag: 841cddf8-2458-4f7d-bacd-d5d80cc37c17
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Count1 = count(financials[Product])
+		formatString: 0
+		lineageTag: 2c3866cc-9d80-422a-8c72-e23b31446054
+
+	measure 'Average Sale' = AVERAGE(financials[Sale Price])
+		lineageTag: 4b02b5e5-a02e-43e8-80ee-5ec2348769ac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'New && measure' = ```
+			CALCULATE([Total Revenue sumx], financials[Product] = "VTT" , ALL( financials[Product])) ---|| financials[Product] ="Velo") 
+			```
+		lineageTag: ec43a58e-09e7-4eea-87fa-57dc34ffcc54
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 58ced33a-f2dc-43c8-8136-eefb54dcef0c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '.Measures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 209d511e1a0146bbaac85a0206261aa6
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

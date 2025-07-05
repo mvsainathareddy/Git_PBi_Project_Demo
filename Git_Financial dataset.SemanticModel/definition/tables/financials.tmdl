@@ -1,0 +1,346 @@
+table financials
+	lineageTag: 1933ff0a-64a2-4cf1-ae8c-1a4f70af6b42
+
+	measure 'Color red' = "#fb1292"
+		lineageTag: 5b67079a-e47f-491c-b2c1-6e68940b683d
+
+	measure 'Color green' = "#00FF00"
+		lineageTag: 4819fe87-ef7d-4740-940a-cd85600594fc
+
+	measure 'color blue' = "#0000FF"
+		lineageTag: f985fa09-866c-4524-bb5d-3684f0e601e3
+
+	measure 'cf rule' = ```
+			
+			VAR _measure =[Total Sales]
+			VAR _month = SELECTEDVALUE(financials[Month Number])
+			VAR _result=
+			SWITCH(TRUE(),
+			--_measure = 
+			SELECTEDVALUE(financials[Month Number]) ,[color blue],
+			SELECTEDVALUE(financials[Month Number]) ,[color red],
+			SELECTEDVALUE(financials[Month Number]) ,[Color green],
+			--_measure >2 ,[color red],
+			--_measure >3 ,[Color green],
+			BLANK())
+			RETURN _result
+			```
+		lineageTag: d95244a2-8031-4d44-aec7-0a8e52816f2b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DataColor_fact = ```
+			
+			VAR _month = SELECTEDVALUE(financials[Month Number])
+			VAR _color = 
+			    SWITCH(
+			        MOD(_month, 3),
+			        1, "#00FF00",  // Green
+			        2, "#0000FF",  // Blue
+			        0, "#fb1292",  // Red
+			        "#D3D3D3"  // Default color if no match (Light Gray)
+			    )
+			RETURN _color
+			```
+		lineageTag: 7e00113d-1ab6-4683-ae6f-21f0bf343522
+
+	measure DataColor_f2 = ```
+			
+			VAR _month = SELECTEDVALUE(financials[Month Number])
+			VAR _color = 
+			    SWITCH(
+			        MOD(_month - 1, 3),
+			        0, "#00FF00",  // Green
+			        1, "#0000FF",  // Blue
+			        2, "#fb1292",  // Red
+			        "#D3D3D3"  // Default color if no match (Light Gray)
+			    )
+			RETURN _color
+			/*VAR _selectedMonth = SELECTEDVALUE(financials[Month Number])
+			 VAR _selectedMonthmin = min(financials[Month Number])
+			VAR _currentMonth = _selectedMonthmin
+			VAR _offset = MOD(_currentMonth - _selectedMonth, 3)
+			VAR _color = 
+			    SWITCH(
+			        TRUE(),
+			        _offset = 0, "#00FF00",  // Green
+			        _offset = 1, "#0000FF",  // Blue
+			        _offset = 2, "#fb1292",  // Red
+			        "#D3D3D3"  // Default color if no match (Light Gray)
+			    )*/
+			/*VAR _selectedMonth = SELECTEDVALUE(financials[Month Number])
+			VAR _currentMonth = SELECTEDVALUE(financials[Month Number])
+			VAR _offset = MOD(_currentMonth - _selectedMonth, 3)
+			VAR _color = 
+			     SWITCH(
+			        TRUE(),
+			        _offset = 0, "#00FF00",  // Green
+			        _offset = 1, "#0000FF",  // Blue
+			        _offset = 2, "#fb1292",  // Red
+			        "#D3D3D3"  // Default color if no match (Light Gray)
+			    )*/
+			--RETURN _color
+			```
+		lineageTag: f8209ae4-6f27-473e-bf12-7fbe236951a6
+
+	column Segment
+		dataType: string
+		lineageTag: eba56d12-acac-40c5-86ae-ff4b70d01ce9
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 392b1203-c177-4218-b612-e8a06274003d
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: 28622671-9cbf-4a07-8d16-46ffcda99ee4
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discount Band'
+		dataType: string
+		lineageTag: 2501b503-4edc-4f41-9bf3-4551c25d1c79
+		summarizeBy: none
+		sourceColumn: Discount Band
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Units Sold'
+		dataType: int64
+		lineageTag: 5251a0da-5206-4a2f-a686-c080cc21e3b8
+		summarizeBy: sum
+		sourceColumn: Units Sold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Manufacturing Price'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4306947d-894f-4727-9d25-41f919b0365b
+		summarizeBy: sum
+		sourceColumn: Manufacturing Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sale Price'
+		dataType: int64
+		formatString: 0
+		lineageTag: 36b13625-eb06-40f3-9fd6-efb1899223da
+		summarizeBy: sum
+		sourceColumn: Sale Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gross Sales'
+		dataType: double
+		lineageTag: 08bfe99e-ea9b-432e-8dac-d307cc1eca41
+		summarizeBy: sum
+		sourceColumn: Gross Sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Discounts
+		dataType: double
+		lineageTag: cf058bb0-4510-459d-9e4a-68be2b621d81
+		summarizeBy: sum
+		sourceColumn: Discounts
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ' Sales'
+		dataType: double
+		lineageTag: 21095693-2b5f-4bfe-97d8-4b95bc3bd0f7
+		summarizeBy: sum
+		sourceColumn: " Sales"
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COGS
+		dataType: double
+		lineageTag: a5ad3c76-638b-4096-a812-5001f31eec24
+		summarizeBy: sum
+		sourceColumn: COGS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: 6c4e18db-7517-43dc-bb5a-c6afd61fde5e
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a7d6e3ec-23b1-4ae6-b906-9c26b21d1e48
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 59b1f3d6-b10c-4dce-94e8-ddaff5f7fc22
+		summarizeBy: sum
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 233fc7c9-1207-4a34-8c7d-4a837fdf71e3
+		summarizeBy: none
+		sourceColumn: Month Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 41f85060-4253-4774-9de2-a293810e625f
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total RV*' =
+			--CALCULATE( // calculate used for filter context change
+			    SUM(financials[Sale Price]) * sum(financials[Units Sold])
+			    --)
+		formatString: #,0
+		lineageTag: 8bb9a845-e197-439c-abe7-93aa9b447f23
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales cal SumX' =
+			
+			--CALCULATE(
+			    SUMX(
+			    financials,financials[ Sales]
+			             --financials[Sale Price]* financials[Units Sold]
+			    )
+			    --)
+		isHidden
+		lineageTag: 52b94f89-706b-41aa-9670-e94c8a741fa6
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quarter = "Q" & FORMAT(financials[Date], "Q")
+		lineageTag: bd400b48-cfb0-445d-9b8f-d2256a87d9d0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Category' =
+			IF(financials[ Sales] > 1000, "High", "Low")
+			/*Where to Use: Use this calculated column in customer segmentation reports to identify high-value and low-value customers.
+			Why: Segmenting customers helps in targeted marketing and personalized customer service.
+			Importance: Calculated columns provide row-level calculations that can be used for detailed analysis and reporting
+			*/
+		lineageTag: 996ed252-4361-4f1e-9f87-52d4b19cc707
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Sales Cal' =
+			--CALCULATE(
+			    SUM(financials[ Sales])
+			    --)
+		lineageTag: 105c7df5-2bec-4e00-81a1-96aa173e4f0c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'sumx wrong' = ```
+			--CALCULATE(
+			SUMX(financials, 
+			financials[Sale Price] * financials[Units Sold])
+			--)
+			```
+		formatString: 0
+		lineageTag: 9d53cf6d-9ba4-49b4-b674-e5fa6d2574e6
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total sales' = SUM(financials[ Sales])
+		lineageTag: 043f0e1d-23f7-473e-a0f7-e99511ad69a7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'New cal' = financials[Sale Price] * financials[Units Sold]
+		formatString: 0
+		lineageTag: 596054bb-4592-4b1f-b24c-f6f934a5219a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'total revenue cal' = ```
+			CALCULATE( 
+			        SUM(financials[Sale Price]) * sum(financials[Units Sold])
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 3012566b-9a6f-43d7-a683-395223892170
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition financials = m
+		mode: import
+		source =
+				let
+				 Source = Excel.Workbook(File.Contents("C:\Program Files\Microsoft Power BI Desktop\bin\SampleData\Financial Sample.xlsx"), null, true),
+				    financials_Table = Source{[Item="financials",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(financials_Table,{{"Segment", type text}, {"Country", type text}, {"Product", type text}, {"Discount Band", type text}, {"Units Sold", type number}, {"Manufacturing Price", Int64.Type}, {"Sale Price", Int64.Type}, {"Gross Sales", type number}, {"Discounts", type number}, {" Sales", type number}, {"COGS", type number}, {"Profit", type number}, {"Date", type date}, {"Month Number", Int64.Type}, {"Month Name", type text}, {"Year", Int64.Type}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Changed Type",{{"Date", type date}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type2",{{"Units Sold", Int64.Type}}),
+				    // Filtered Rows for Montana product excluded in report
+				    #"Filtered Rows<>Montana" = Table.SelectRows(#"Changed Type1", each ([Product] <> "Montana"))
+				in
+				    #"Filtered Rows<>Montana"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

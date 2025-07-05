@@ -1,0 +1,120 @@
+table 'Dim Date'
+	lineageTag: 861bfba2-f894-48d2-975a-926c879f89af
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 276b4ff0-4eef-4fb0-9aaf-dab45aef66e7
+		summarizeBy: none
+		sourceColumn: Date
+		sortByColumn: MonthYear
+
+		changedProperty = DataType
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: string
+		lineageTag: 0e3d415b-c734-409e-b4e9-0597ab9db1fb
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 87f2725c-f7a9-4354-9ac3-19cf2fb82255
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: string
+		lineageTag: 00948336-e05b-4e0b-aa68-033158504e67
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 81dd8e04-dc07-4ffd-a040-f56ba8b624ac
+		summarizeBy: none
+		sourceColumn: Month Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MonthYY Cal' = FORMAT('Dim Date'[Date], "MMYYYY")
+		dataType: string
+		isHidden
+		lineageTag: e8f43047-ebf3-4b8a-b0a5-c721be497b90
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthYear
+		dataType: string
+		lineageTag: 7858c9d6-617e-46bf-8e37-8091444255a4
+		summarizeBy: none
+		sourceColumn: MonthYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: 978d5edb-159d-4c58-be04-3215db8775c9
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dim Date' = m
+		mode: import
+		source = ```
+				let
+				    // Load the fact table
+				    FactTable = financials,
+				    
+				    // Extract the minimum and maximum dates
+				    MinDate = List.Min(FactTable[Date]),
+				    MaxDate = List.Max(FactTable[Date]),
+				    
+				    // Calculate the number of days between the dates
+				    NumberOfDays = Duration.Days(MaxDate - MinDate) + 1,
+				    
+				    // Create a list of dates
+				    DateList = List.Dates(MinDate, NumberOfDays, #duration(1, 0, 0, 0)),
+				    
+				    // Convert the list to a table
+				    CalendarTable = Table.FromList(DateList, Splitter.SplitByNothing(), {"Date"}),
+				    
+				    // Add additional columns
+				    AddYear = Table.AddColumn(CalendarTable, "Year", each Date.Year([Date])),
+				    AddMonth = Table.AddColumn(AddYear, "Month", each Date.Month([Date])),
+				    AddDay = Table.AddColumn(AddMonth, "Day", each Date.Day([Date])),
+				    AddMonthName = Table.AddColumn(AddDay, "Month Name", each Date.ToText([Date], "MMMM")),
+				    AddDayName = Table.AddColumn(AddMonthName, "Day Name", each Date.ToText([Date], "dddd")),
+				     // Add MonthYear column in the format "MMYYYY"
+				    AddMonthYear = Table.AddColumn(AddMonthName, "MonthYear", each Text.PadStart(Text.From(Date.Month([Date])), 2, "0") & Text.From(Date.Year([Date]))),
+				
+				// Add Quarter column
+				    AddQuarter = Table.AddColumn(AddMonthYear, "Quarter", each "Q" & Text.From(Number.RoundUp(Date.Month([Date]) / 3)))
+				in
+				    AddQuarter
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,346 @@
+table Sheet1
+	lineageTag: ff65381e-3049-4af1-8b68-b6b51c3ceeae
+
+	column Id
+		dataType: int64
+		formatString: 0
+		lineageTag: 484258ee-e411-4015-a9f6-6bcc8f7d5b59
+		summarizeBy: count
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bfa1585e-6145-4b89-a95b-97c2154ef62e
+		summarizeBy: none
+		sourceColumn: Start time
+
+		variation Variation
+			isDefault
+			relationship: 58507a7a-1d84-4084-8a68-0a641fc8fc9b
+			defaultHierarchy: LocalDateTable_93d137e4-ae77-4a7c-865a-80449eab357e.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Completion time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c3e181d7-4ab9-42e6-b044-47cde0ba0ed1
+		summarizeBy: none
+		sourceColumn: Completion time
+
+		variation Variation
+			isDefault
+			relationship: c80af312-a39b-491d-806c-3f719a4258c0
+			defaultHierarchy: LocalDateTable_9d560a41-aaa4-4884-b954-e9bbc0c8c8d6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 209f2ff3-a44c-419d-ad63-a56a4bf508d3
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: f4e69e3d-bab0-4aaf-829b-45fadc74cc9a
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total points'
+		dataType: int64
+		formatString: 0
+		lineageTag: d2578820-aade-40dd-be39-f39285eb4740
+		summarizeBy: sum
+		sourceColumn: Total points
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quiz feedback'
+		dataType: string
+		lineageTag: d72103e2-c77e-4b9b-b7c8-18a987f1831b
+		summarizeBy: none
+		sourceColumn: Quiz feedback
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grade posted time'
+		dataType: string
+		lineageTag: 13e261e4-5107-4891-84af-58fe1c1d5589
+		summarizeBy: none
+		sourceColumn: Grade posted time
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'What is Power BI?'
+		dataType: string
+		lineageTag: 2d583bd7-7163-4e93-bb85-acf4eb9f33a9
+		summarizeBy: none
+		sourceColumn: What is Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - What is Power BI?'
+		dataType: int64
+		formatString: 0
+		lineageTag: 48ded5f3-5888-4ba8-a78b-96f841e51f6b
+		summarizeBy: sum
+		sourceColumn: Points - What is Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - What is Power BI?'
+		dataType: string
+		lineageTag: 138c1603-0d15-4f89-86ae-44f1da091368
+		summarizeBy: none
+		sourceColumn: Feedback - What is Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column ' What is a Power BI Dashboard?'
+		dataType: string
+		lineageTag: 39a08fe8-d90a-4436-972e-f5c9d2b1e6ca
+		summarizeBy: none
+		sourceColumn: " What is a Power BI Dashboard?"
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points -  What is a Power BI Dashboard?'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7aeb1011-e4ee-4fab-9a6a-185f9d8c7021
+		summarizeBy: sum
+		sourceColumn: Points -  What is a Power BI Dashboard?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback -  What is a Power BI Dashboard?'
+		dataType: string
+		lineageTag: 4a1e43c5-21a8-4fe0-ba9b-348859352cbf
+		summarizeBy: none
+		sourceColumn: Feedback -  What is a Power BI Dashboard?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Which of the following is NOT a component of Power BI?'
+		dataType: string
+		lineageTag: a1ad2209-0d13-44dd-b026-b075ba6b65c8
+		summarizeBy: none
+		sourceColumn: Which of the following is NOT a component of Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - Which of the following is NOT a component of Power BI?'
+		dataType: int64
+		formatString: 0
+		lineageTag: e856f2a4-0256-4afa-8889-154f56325c75
+		summarizeBy: sum
+		sourceColumn: Points - Which of the following is NOT a component of Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - Which of the following is NOT a component of Power BI?'
+		dataType: string
+		lineageTag: c937e4c4-7ff0-4735-b253-9f0148348d9c
+		summarizeBy: none
+		sourceColumn: Feedback - Which of the following is NOT a component of Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'How can you share Power BI reports with others?'
+		dataType: string
+		lineageTag: b9763d10-d27b-43e9-afe6-fbf68c22a567
+		summarizeBy: none
+		sourceColumn: How can you share Power BI reports with others?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - How can you share Power BI reports with others?'
+		dataType: int64
+		formatString: 0
+		lineageTag: 697fb2ef-3f12-46af-b3f1-f7d046ab62fd
+		summarizeBy: sum
+		sourceColumn: Points - How can you share Power BI reports with others?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - How can you share Power BI reports with others?'
+		dataType: string
+		lineageTag: e01bc0f1-3938-4923-ac5a-091fbf4dde68
+		summarizeBy: none
+		sourceColumn: Feedback - How can you share Power BI reports with others?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'What is the purpose of Power Query in Power BI?'
+		dataType: string
+		lineageTag: c3553f54-88b3-4efb-8d75-61e7f9b40a51
+		summarizeBy: none
+		sourceColumn: What is the purpose of Power Query in Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - What is the purpose of Power Query in Power BI?'
+		dataType: int64
+		formatString: 0
+		lineageTag: f27e72fc-d97c-453a-9a04-406aaaac1654
+		summarizeBy: sum
+		sourceColumn: Points - What is the purpose of Power Query in Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - What is the purpose of Power Query in Power BI?'
+		dataType: string
+		lineageTag: 5e823d51-a8f8-44d1-80b2-0ffada92e1f6
+		summarizeBy: none
+		sourceColumn: Feedback - What is the purpose of Power Query in Power BI?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'What does DAX stand for?'
+		dataType: string
+		lineageTag: 4a117a6a-c89a-44f8-ba79-605af9f9a471
+		summarizeBy: none
+		sourceColumn: What does DAX stand for?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - What does DAX stand for?'
+		dataType: int64
+		formatString: 0
+		lineageTag: fa301392-8207-4b53-aadb-9018fd71bf1a
+		summarizeBy: sum
+		sourceColumn: Points - What does DAX stand for?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - What does DAX stand for?'
+		dataType: string
+		lineageTag: c4599afa-7e6d-416c-8b33-9f00e1b69045
+		summarizeBy: none
+		sourceColumn: Feedback - What does DAX stand for?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'What is a DAX measure?'
+		dataType: string
+		lineageTag: b20db9cc-72b0-445b-9a0b-d82ed26817fa
+		summarizeBy: none
+		sourceColumn: What is a DAX measure?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - What is a DAX measure?'
+		dataType: int64
+		formatString: 0
+		lineageTag: 79a326ec-c167-4e05-8c75-bcb581404e23
+		summarizeBy: sum
+		sourceColumn: Points - What is a DAX measure?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - What is a DAX measure?'
+		dataType: string
+		lineageTag: 4938be8b-c9ac-4d84-bd6d-1de4f1b4b745
+		summarizeBy: none
+		sourceColumn: Feedback - What is a DAX measure?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'How do you create a calculated column in Power BI using DAX?'
+		dataType: string
+		lineageTag: e2b92ef1-7c11-430f-bf86-66b6865943d9
+		summarizeBy: none
+		sourceColumn: How do you create a calculated column in Power BI using DAX?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - How do you create a calculated column in Power BI using DAX?'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8576e745-73bc-4cc6-9c77-5dd375d27e19
+		summarizeBy: sum
+		sourceColumn: Points - How do you create a calculated column in Power BI using DAX?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - How do you create a calculated column in Power BI using DAX?'
+		dataType: string
+		lineageTag: c646182d-bd73-42a9-86a4-7cb6d37c79ea
+		summarizeBy: none
+		sourceColumn: Feedback - How do you create a calculated column in Power BI using DAX?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'What is the difference between a calculated column and a measure in DAX?'
+		dataType: string
+		lineageTag: f3928db7-ae35-4e9c-9e10-4916552c0752
+		summarizeBy: none
+		sourceColumn: What is the difference between a calculated column and a measure in DAX?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - What is the difference between a calculated column and a measure in DAX?'
+		dataType: int64
+		formatString: 0
+		lineageTag: 390d474b-cff0-4be2-a2fe-b0b65129b021
+		summarizeBy: sum
+		sourceColumn: Points - What is the difference between a calculated column and a measure in DAX?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - What is the difference between a calculated column and a measure in DAX?'
+		dataType: string
+		lineageTag: 45133e1c-4cfd-4c33-95fe-2605b060f89c
+		summarizeBy: none
+		sourceColumn: Feedback - What is the difference between a calculated column and a measure in DAX?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Which of the following is a simple DAX formula?'
+		dataType: string
+		lineageTag: 2eefd828-2e0d-4100-bd83-09de82dfd935
+		summarizeBy: none
+		sourceColumn: Which of the following is a simple DAX formula?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Points - Which of the following is a simple DAX formula?'
+		dataType: int64
+		formatString: 0
+		lineageTag: 08a2bfa6-b559-4227-8e71-b8e6a82b45bd
+		summarizeBy: sum
+		sourceColumn: Points - Which of the following is a simple DAX formula?
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Feedback - Which of the following is a simple DAX formula?'
+		dataType: string
+		lineageTag: 14376626-a478-46c2-a1de-668285f03d27
+		summarizeBy: none
+		sourceColumn: Feedback - Which of the following is a simple DAX formula?
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sheet1 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\vmadda\OneDrive - hsconline\Basics of Power BI.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Id", Int64.Type}, {"Start time", type datetime}, {"Completion time", type datetime}, {"Email", type text}, {"Name", type text}, {"Total points", Int64.Type}, {"Quiz feedback", type any}, {"Grade posted time", type any}, {"What is Power BI?", type text}, {"Points - What is Power BI?", Int64.Type}, {"Feedback - What is Power BI?", type any}, {" What is a Power BI Dashboard?", type text}, {"Points -  What is a Power BI Dashboard?", Int64.Type}, {"Feedback -  What is a Power BI Dashboard?", type any}, {"Which of the following is NOT a component of Power BI?", type text}, {"Points - Which of the following is NOT a component of Power BI?", Int64.Type}, {"Feedback - Which of the following is NOT a component of Power BI?", type any}, {"How can you share Power BI reports with others?", type text}, {"Points - How can you share Power BI reports with others?", Int64.Type}, {"Feedback - How can you share Power BI reports with others?", type any}, {"What is the purpose of Power Query in Power BI?", type text}, {"Points - What is the purpose of Power Query in Power BI?", Int64.Type}, {"Feedback - What is the purpose of Power Query in Power BI?", type any}, {"What does DAX stand for?", type text}, {"Points - What does DAX stand for?", Int64.Type}, {"Feedback - What does DAX stand for?", type any}, {"What is a DAX measure?", type text}, {"Points - What is a DAX measure?", Int64.Type}, {"Feedback - What is a DAX measure?", type any}, {"How do you create a calculated column in Power BI using DAX?", type text}, {"Points - How do you create a calculated column in Power BI using DAX?", Int64.Type}, {"Feedback - How do you create a calculated column in Power BI using DAX?", type any}, {"What is the difference between a calculated column and a measure in DAX?", type text}, {"Points - What is the difference between a calculated column and a measure in DAX?", Int64.Type}, {"Feedback - What is the difference between a calculated column and a measure in DAX?", type any}, {"Which of the following is a simple DAX formula?", type text}, {"Points - Which of the following is a simple DAX formula?", Int64.Type}, {"Feedback - Which of the following is a simple DAX formula?", type any}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

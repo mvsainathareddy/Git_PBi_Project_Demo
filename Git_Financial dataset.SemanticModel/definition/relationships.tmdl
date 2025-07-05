@@ -1,0 +1,51 @@
+relationship AutoDetected_20fc55df-56ff-40d6-8087-984f4a6d6c94
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: TableIsRemoveColumns.Column1
+	toColumn: TableFromList.Column1
+
+relationship 0b09374d-7283-ca9b-26b7-33a4a06df09b
+	fromColumn: financials.Date
+	toColumn: 'Dim Date'.Date
+
+relationship 63bfd2be-f08b-4f3f-8b8b-647c2b7d5611
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.Date
+	toColumn: LocalDateTable_0d86e437-e4af-4141-ab12-199ccdedc775.Date
+
+relationship 054ad398-a99b-7bec-b6dc-49286ede19cd
+	fromColumn: financials.Date
+	toColumn: Calendar.Date
+
+relationship 833dadd9-bc3d-43ec-9752-850ad825be3f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Calendar 1'.Date
+	toColumn: LocalDateTable_6137cb52-9044-4fab-a7f2-cb7f82c322a2.Date
+
+relationship a5db307e-9f43-75b4-c147-dbb54291e7c1
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: financials.Product
+	toColumn: Product.Product
+
+relationship 6b5422b6-4780-4358-a334-1fc48ddec8e6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'OfficeForms Table'.'Start time'
+	toColumn: LocalDateTable_fa79e5b7-b250-4dce-84af-2de08558f657.Date
+
+relationship 8603a876-6d76-4f3f-99f0-ab24600191a3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'OfficeForms Table'.'Completion time'
+	toColumn: LocalDateTable_1be60460-af32-4af7-bc1e-f869fe794585.Date
+
+relationship 58507a7a-1d84-4084-8a68-0a641fc8fc9b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sheet1.'Start time'
+	toColumn: LocalDateTable_93d137e4-ae77-4a7c-865a-80449eab357e.Date
+
+relationship c80af312-a39b-491d-806c-3f719a4258c0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sheet1.'Completion time'
+	toColumn: LocalDateTable_9d560a41-aaa4-4884-b954-e9bbc0c8c8d6.Date
+

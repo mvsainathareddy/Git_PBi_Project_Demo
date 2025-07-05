@@ -1,0 +1,25 @@
+table TableIsEmpty
+	lineageTag: b106ea75-daff-4957-a276-f3dee7616694
+
+	column TableIsEmpty
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 53fd8673-c40e-4de7-a161-4f8bc1fab0dd
+		summarizeBy: none
+		sourceColumn: TableIsEmpty
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TableIsEmpty = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRecords({}),
+				    IsEmpty = Table.IsEmpty(Source)
+				in
+				    IsEmpty
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Logical
+

@@ -1,0 +1,44 @@
+table Product
+	lineageTag: 1ad12372-a85c-4b4b-92de-699a08323b20
+
+	column Segment
+		dataType: string
+		lineageTag: a22ecf29-b409-4f61-9b88-de040ee17fa4
+		summarizeBy: none
+		sourceColumn: Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: b41e66cc-1e90-4f0e-ba4d-df12104739d1
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: d832a59b-6371-4765-922d-31e2463501b9
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				 Source = Excel.Workbook(File.Contents("C:\Program Files\Microsoft Power BI Desktop\bin\SampleData\Financial Sample.xlsx"), null, true),
+				    financials_Table = Source{[Item="financials",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(financials_Table,{{"Segment", type text}, {"Country", type text}, {"Product", type text}, {"Discount Band", type text}, {"Units Sold", type number}, {"Manufacturing Price", Int64.Type}, {"Sale Price", Int64.Type}, {"Gross Sales", type number}, {"Discounts", type number}, {" Sales", type number}, {"COGS", type number}, {"Profit", type number}, {"Date", type date}, {"Month Number", Int64.Type}, {"Month Name", type text}, {"Year", Int64.Type}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Changed Type",{{"Date", type date}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type2",{{"Units Sold", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type1",{"Segment", "Country", "Product"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
