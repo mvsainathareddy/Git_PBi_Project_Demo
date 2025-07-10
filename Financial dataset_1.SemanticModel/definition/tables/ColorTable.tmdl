@@ -1,0 +1,70 @@
+table ColorTable
+	lineageTag: cc6d7d96-0490-4bfe-b813-eb5b0153504a
+
+	measure datacolor = LOOKUPVALUE(ColorTable[MonthNum],ColorTable[Color],SELECTEDVALUE(financials[Month Number]),"Light blue")
+		lineageTag: 14eb0e37-e0fa-40f7-8853-68871699c9b0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DataColor1 =
+			
+			SWITCH(
+			    SELECTEDVALUE(financials[Month Number]),
+			    1, "Green",
+			    2, "Blue",
+			    3, "Red",
+			    4, "Green",
+			    5, "Blue",
+			    6, "Red",
+			    7, "Green",
+			    8, "Blue",
+			    9, "Red",
+			    10, "Green",
+			    11, "Blue",
+			    12, "Red",
+			    "Light blue"  // Default color if no match
+			)
+		lineageTag: 5062922c-178e-4cc9-bb96-c5048e5c2d0d
+
+	column MonthNum
+		formatString: 0
+		lineageTag: 39c26590-2970-4a07-a3e7-7e20205a36da
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Monthnum]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		lineageTag: 5baf43f1-ba45-4ddb-b8e3-922cb147a7e7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Color]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ColorTable = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "MonthNum", INTEGER,
+				    "Color", STRING,
+				    {
+				        {1, "Green"},
+				        {2, "Blue"},
+				        {3, "Red"},
+				        {4, "Green"},
+				        {5, "Blue"},
+				        {6, "Red"},
+				        {7, "Green"},
+				        {8, "Blue"},
+				        {9, "Red"},
+				        {10, "Green"},
+				        {11, "Blue"},
+				        {12, "Red"}
+				    }
+				)
+
+	annotation PBI_Id = 50c582c660c742f2b870e6957d367768
+

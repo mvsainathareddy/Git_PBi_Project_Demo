@@ -1,0 +1,35 @@
+table TableIsRemoveColumns
+	lineageTag: 5de24dc9-57b9-42e5-9516-8f20e4eebeb7
+
+	column Column1
+		dataType: string
+		lineageTag: f0ff2b0d-4b30-47ea-a8fc-b35f7005b0fa
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: bbecb95c-0c26-436c-9453-6946a326ae6b
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TableIsRemoveColumns = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRecords({
+				        [Column1 = 1, Column2 = "A", Column3 = "X"],
+				        [Column1 = 2, Column2 = "B", Column3 = "Y"]
+				    }),
+				    Result = Table.RemoveColumns(Source, {"Column3"})
+				in
+				    Result
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

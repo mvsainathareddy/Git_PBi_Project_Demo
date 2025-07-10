@@ -1,0 +1,29 @@
+table 'TableIsRemoveColumns (2)'
+	lineageTag: 5f9bdc54-18bc-4ed7-8dba-226ed6d7cb1b
+
+	column 'TableIsRemoveColumns (2)'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0fe62f5d-1694-4a6e-ac3f-6f0fbb7b03aa
+		summarizeBy: none
+		sourceColumn: TableIsRemoveColumns (2)
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'TableIsRemoveColumns (2)' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRecords({
+				        [Column1 = 1, Column2 = "A"],
+				        [Column1 = 2, Column2 = "B"]
+				    }),
+				    RowToCheck = [Column1 = 1, Column2 = "A"],
+				    Contains = Table.Contains(Source, RowToCheck)
+				in
+				    Contains
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Logical
+

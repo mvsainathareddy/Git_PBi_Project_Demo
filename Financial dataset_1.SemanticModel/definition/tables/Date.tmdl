@@ -1,0 +1,29 @@
+table Date
+	isHidden
+	lineageTag: 6dcf245b-686f-49e5-a01e-64d64ea26800
+
+	column Date
+		dataType: string
+		isHidden
+		lineageTag: 0d7da211-1464-4bb9-ac7e-526edb0f213d
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    Source = "let#(cr)#(lf)    // Load the fact table#(cr)#(lf)    FactTable = YourFactTableName,#(cr)#(lf)    #(cr)#(lf)    // Extract the minimum and maximum dates#(cr)#(lf)    MinDate = List.Min(FactTable[FactDate]),#(cr)#(lf)    MaxDate = List.Max(FactTable[FactDate]),#(cr)#(lf)    #(cr)#(lf)    // Calculate the number of days between the dates#(cr)#(lf)    NumberOfDays = Duration.Days(MaxDate - MinDate) + 1,#(cr)#(lf)    #(cr)#(lf)    // Create a list of dates#(cr)#(lf)    DateList = List.Dates(MinDate, NumberOfDays, #duration(1, 0, 0, 0)),#(cr)#(lf)    #(cr)#(lf)    // Convert the list to a table#(cr)#(lf)    CalendarTable = Table.FromList(DateList, Splitter.SplitByNothing(), {""Date""}),#(cr)#(lf)    #(cr)#(lf)    // Add additional columns#(cr)#(lf)    AddYear = Table.AddColumn(CalendarTable, ""Year"", each Date.Year([Date])),#(cr)#(lf)    AddMonth = Table.AddColumn(AddYear, ""Month"", each Date.Month([Date])),#(cr)#(lf)    AddDay = Table.AddColumn(AddMonth, ""Day"", each Date.Day([Date])),#(cr)#(lf)    AddMonthName = Table.AddColumn(AddDay, ""Month Name"", each Date.ToText([Date], ""MMMM"")),#(cr)#(lf)    AddDayName = Table.AddColumn(AddMonthName, ""Day Name"", each Date.ToText([Date], ""dddd""))#(cr)#(lf)in#(cr)#(lf)    AddDayName"
+				in
+				    Source
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
